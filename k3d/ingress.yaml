@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: testapp-ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: testapp-backend-service
+                port:
+                  number: 4040
+# Domain: example.com
+# api.example.com/ --> testapp-backend-service
+# example.com --> testapp-frontend-service
+
+# Intern
+# localhost:4040 --> testapp-backend-service
+# localhost:3000 --> testapp-frontend-service
+
